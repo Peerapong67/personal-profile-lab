@@ -117,21 +117,23 @@ function ProfileCard({ profile }) {
             </div>
 
             {/* งานอดิเรก */}
-            <ul className="hobbies-list">
-                {profile.hobbies.map((hobby, index) => (
-                    <li
-                        key={index}
-                        className={`hobby-item ${favoriteHobbies.includes(hobby) ? 'favorite' : ''}`}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            toggleFavoriteHobby(hobby);
-                        }}
-                    >
-                        {hobby} {favoriteHobbies.includes(hobby) && '💖'}
-                    </li>
-                ))}
-            </ul>
-
+            <div className="profile-section">
+                <h3>💻 งานอดิเรก </h3>
+                <ul className="hobbies-list">
+                    {profile.hobbies.map((hobby, index) => (
+                        <li
+                            key={index}
+                            className={`hobby-item ${favoriteHobbies.includes(hobby) ? 'favorite' : ''}`}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                toggleFavoriteHobby(hobby);
+                            }}
+                        >
+                            {hobby} {favoriteHobbies.includes(hobby) && '💖'}
+                        </li>
+                    ))}
+                </ul>
+            </div>
             {/* ทักษะ */}
             <div className="profile-section">
                 <h3>💻 ทักษะ</h3>
@@ -149,52 +151,58 @@ function ProfileCard({ profile }) {
             </div>
 
             {/* Social Links */}
-            {profile.socialLinks && profile.socialLinks.length > 0 && (
-                <div className="profile-section">
-                    <h3>🌐 Social Media</h3>
-                    <div className="social-links">
-                        {profile.socialLinks.map((social, index) => (
-                            <div
-                                key={index}
-                                className="social-link"
-                                onClick={() => window.open(social.url, "_blank")}
-                            >
-                                {social.platform}
-                            </div>
-                        ))}
+            {
+                profile.socialLinks && profile.socialLinks.length > 0 && (
+                    <div className="profile-section">
+                        <h3>🌐 Social Media</h3>
+                        <div className="social-links">
+                            {profile.socialLinks.map((social, index) => (
+                                <div
+                                    key={index}
+                                    className="social-link"
+                                    onClick={() => window.open(social.url, "_blank")}
+                                >
+                                    {social.platform}
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                </div>
-            )}
+                )
+            }
 
             {/* Contact Form */}
-            {showContactForm && (
-                <div className="contact-form" onClick={(e) => e.stopPropagation()}>
-                    <form onSubmit={handleContactSubmit}>
-                        <textarea
-                            value={contactMessage}
-                            onChange={(e) => setContactMessage(e.target.value)}
-                            placeholder="พิมพ์ข้อความของคุณ..."
-                            required
-                        />
-                        <button type="submit">ส่งข้อความ</button>
-                        <button type="button" onClick={() => setShowContactForm(false)}>ยกเลิก</button>
-                    </form>
-                </div>
-            )}
+            {
+                showContactForm && (
+                    <div className="contact-form" onClick={(e) => e.stopPropagation()}>
+                        <form onSubmit={handleContactSubmit}>
+                            <textarea
+                                value={contactMessage}
+                                onChange={(e) => setContactMessage(e.target.value)}
+                                placeholder="พิมพ์ข้อความของคุณ..."
+                                required
+                            />
+                            <button type="submit">ส่งข้อความ</button>
+                            <button type="button" onClick={() => setShowContactForm(false)}>ยกเลิก</button>
+                        </form>
+                    </div>
+                )
+            }
 
             {/* ปุ่มเปิดฟอร์ม */}
-            {!showContactForm && (
-                <button
-                    className="contact-button"
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        handleContactClick();
-                    }}
-                >
-                    📧 ติดต่อ {profile.name}
-                </button>
-            )}
-        </div>
+            {
+                !showContactForm && (
+                    <button
+                        className="contact-button"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            handleContactClick();
+                        }}
+                    >
+                        📧 ติดต่อ {profile.name}
+                    </button>
+                )
+            }
+        </div >
     );
 }
 
